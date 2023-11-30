@@ -14,7 +14,7 @@
               <div class="col-lg-6 text-lg-right">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb justify-content-lg-end mb-0 px-0">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Cart</li>
                   </ol>
                 </nav>
@@ -87,7 +87,7 @@
               <div class="bg-light px-4 py-3">
                 <div class="row align-items-center text-center">
                   <div class="col-md-6 mb-3 mb-md-0 text-md-left"><a class="btn btn-link p-0 text-dark btn-sm" href="{% url 'store:home' %}"><i class="fas fa-long-arrow-alt-left mr-2"> </i>Continue shopping</a></div>
-                  <div class="col-md-6 text-md-right"><a class="btn btn-outline-dark btn-sm" href="/checkout/">Proceed to checkout<i class="fas fa-long-arrow-alt-right ml-2"></i></a></div>
+                  <div class="col-md-6 text-md-right"><a class="btn btn-dark btn-sm" href="/checkout/">Proceed to checkout<i class="fas fa-long-arrow-alt-right ml-2"></i></a></div>
                 </div>
               </div>
             </div>
@@ -114,11 +114,12 @@
                   </ul>
 
                   
-                  <h5 class="text-uppercase my-5">Select Shipping Address</h5>
+                 
                   
                   <form action="{% url 'store:checkout' %}" id="myform">
 
-                    {% if addresses %}
+                    {% if addresses %} 
+                    <h5 class="text-uppercase my-5">Select Shipping Address</h5>
                       {% for address in addresses %}
                         <div class="mb-3">
                         <input type="radio" name="address" value="{{address.id}}"> <strong>Address {{forloop.counter}}</strong> <br>
@@ -130,8 +131,7 @@
                     <!-- Set up a container element for the button -->
                     <div class="text-end" id="paypal-button-container"></div>
 
-                    {% comment %} For Cash on Delivery {% endcomment %}
-                    <button type="submit" class="btn btn-dark btn-lg btn-outline-dark" type="submit"> <i class="fas fa-dollar-sign mr-2"></i>Cash on Delivery</button>
+                 
 
                   </form>
 
@@ -154,36 +154,6 @@
       </div>
       {% endblock content %}
 
-      {% block payment-gateway %}
-        <!-- Include the PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR-PAYPAL-CLIENT-ID&currency=USD"></script>
-
-    <script>
-        // Render the PayPal button into #paypal-button-container
-        paypal.Buttons({
-
-            // Set up the transaction
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '{{total_amount}}'
-                        }
-                    }]
-                });
-            },
-
-            // Finalize the transaction
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    // Show a success message to the buyer
-                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                    // Savind Order in Database after Payment Success
-                    document.getElementById('myform').submit();
-                });
-            }
-
-
-        }).render('#paypal-button-container');
-    </script>
-      {% endblock payment-gateway %}
+      
+      
+    

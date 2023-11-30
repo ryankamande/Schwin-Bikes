@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+  {% block title %}
+    Successful Payment
+  {% endblock %}
+</head>
+{% block content %}
+<p> Payment Successful !!</p>
+        <a href="{% url 'product-detail' %}" class="display-4 pl-4 ml-4 btn rounded-pill" style="background: #d36c4e; color: white; border-radius: 5px;">Continue Shopping</a>
+
+
+{% endblock %}

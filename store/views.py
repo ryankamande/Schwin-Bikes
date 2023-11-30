@@ -1,7 +1,7 @@
 import django
 from django.contrib.auth.models import User
 from store.models import Address, Cart, Category, Order, Product
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404, HttpResponse
 from .forms import RegistrationForm, AddressForm
 from django.contrib import messages
 from django.views import View
@@ -9,7 +9,7 @@ import decimal
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator # for Class Based Views
 from store.common_helper import cart_total_calculator
-
+from django_daraja.mpesa.core import MpesaClient
 
 # Create your views here.
 
@@ -61,7 +61,7 @@ class RegistrationView(View):
     def post(self, request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            messages.success(request, "Congratulations! Registration Successful!")
+            messages.success(request, "Registration Successful!")
             form.save()
         return render(request, 'account/register.html', {'form': form})
         
@@ -88,7 +88,7 @@ class AddressView(View):
             state = form.cleaned_data['state']
             reg = Address(user=user, locality=locality, city=city, state=state)
             reg.save()
-            messages.success(request, "New Address Added Successfully.")
+            messages.success(request, "New Address Successfully Added .")
         return redirect('store:profile')
 
 
@@ -185,7 +185,7 @@ def checkout(request):
         'cart_products': cart_products,
         #TODO: shipping amount
         'cart_total': cart_total_calculator(cart_products, 10),
-        'currency': '$',
+        'currency': 'KSH',
         'user_details': current_user
     }
 
@@ -201,11 +201,12 @@ def payments(request):
         'cart_products': cart_products,
         #TODO: shipping amount
         'cart_total': cart_total_calculator(cart_products, 10),
-        'currency': '$',
-        'user_details': current_user
+        'currency': 'KSH',
+        'user_details': current_user,
+
     }
 
-    return render(request, 'store/checkout.html', context)
+    return render(request, 'store/payments.html', context)
 
 @login_required
 def place_order(request):
@@ -223,19 +224,19 @@ def place_order(request):
 
 @login_required
 def orders(request):
-    all_orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
+    all_orders = Order.objects.filter(user=request.user).order_by('ordered_date')
     return render(request, 'store/orders.html', {'orders': all_orders})
-
-
-
-
 
 def shop(request):
     return render(request, 'store/shop.html')
 
-
-
-
-
-def test(request):
-    return render(request, 'store/test.html')
+@login_required
+def index(request):
+    cl = MpesaClient()
+    phone_number = '0745969972'
+    amount = 1
+    account_reference = 'reference'
+    transaction_desc = 'Schwin Bikes'
+    callback_url = 'https://api.darajambili.com/express-payment'
+    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    return HttpResponse(response)

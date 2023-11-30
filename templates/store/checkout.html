@@ -9,14 +9,14 @@
           <div class="container">
             <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
               <div class="col-lg-6">
-                <h1 class="h2 text-uppercase mb-0">Checkout</h1>
+                <h1 class="h2 text-uppercase mb-0">Billing Checkout</h1>
               </div>
               <div class="col-lg-6 text-lg-right">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb justify-content-lg-end mb-0 px-0">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="cart.html">Cart</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/checkout/">Cart</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Billing</li>
                   </ol>
                 </nav>
               </div>
@@ -51,8 +51,11 @@
                     <input class="form-control form-control-lg" id="company" type="text" placeholder="Your company name">
                   </div>
                   <div class="col-lg-6 form-group">
-                    <label class="text-small text-uppercase" for="country">Country</label>
-                    <select class="selectpicker country" id="country" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country"></select>
+                    <label class="text-small text-uppercase" for="country">Payment Method</label>
+                    <select class="selectpicker country" id="country" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country">
+                      <option value="cash-on-delivery">cash-on-delivery</option>
+                      <option value="Lipa na Mpesa">Lipa na Mpesa</option>
+                    </select>
                   </div>
                   <div class="col-lg-12 form-group">
                     <label class="text-small text-uppercase" for="address">Address line 1</label>
@@ -70,61 +73,16 @@
                     <label class="text-small text-uppercase" for="state">State/County</label>
                     <input class="form-control form-control-lg" id="state" type="text">
                   </div>
-                  <div class="col-lg-6 form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" id="alternateAddressCheckbox" type="checkbox">
-                      <label class="custom-control-label text-small" for="alternateAddressCheckbox">Alternate billing address</label>
-                    </div>
-                  </div>
-                  <div class="col-lg-12">
-                    <div class="row d-none" id="alternateAddress">
-                      <div class="col-12 mt-4">
-                        <h2 class="h4 text-uppercase mb-4">Alternative billing details</h2>
-                      </div>
                       <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="firstName2">First name</label>
-                        <input class="form-control form-control-lg" id="firstName2" type="text" placeholder="Enter your first name">
+                        <label class="text-small text-uppercase" for="country2">Payment Method</label>
+                        <select class="selectpicker" id="country2" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country">
+                          <option value="cash on delivery">cash on delivery</option>
+                          <option value="Lipa na Mpesa">Lipa na Mpesa</option>
+                        </select>
                       </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="lastName2">Last name</label>
-                        <input class="form-control form-control-lg" id="lastName2" type="text" placeholder="Enter your last name">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="email2">Email address</label>
-                        <input class="form-control form-control-lg" id="email2" type="email" placeholder="e.g. Jason@example.com">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="phone2">Phone number</label>
-                        <input class="form-control form-control-lg" id="phone2" type="tel" placeholder="e.g. +02 245354745">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="company2">Company name (optional)</label>
-                        <input class="form-control form-control-lg" id="company2" type="text" placeholder="Your company name">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="country2">Country</label>
-                        <select class="selectpicker country" id="country2" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country"></select>
-                      </div>
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small text-uppercase" for="address2">Address line 1</label>
-                        <input class="form-control form-control-lg" id="address2" type="text" placeholder="House number and street name">
-                      </div>
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small text-uppercase" for="address2">Address line 2</label>
-                        <input class="form-control form-control-lg" id="addressalt2" type="text" placeholder="Apartment, Suite, Unit, etc (optional)">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="city3">Town/City</label>
-                        <input class="form-control form-control-lg" id="city3" type="text">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="state4">State/County</label>
-                        <input class="form-control form-control-lg" id="state4" type="text">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-12 form-group">
-                    <button class="btn btn-dark" type="submit">Place order</button>
+                    <div class="col-lg-12 form-group">
+                    <!-- <button class="btn btn-dark" type="submit">Place order</button> -->
+                    <div class="col-md-6 text-md-left"><a class="btn btn-dark btn-sm" href="/payment/">Proceed to payments<i class="fas fa-long-arrow-alt-right ml-2"></i></a></div>
                   </div>
                 </div>
               </form>

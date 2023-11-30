@@ -3,9 +3,9 @@
 
       {% block content %}
 
-      <!-- HERO SECTION-->
+      <!-- HEADER SECTION-->
       <div class="container">
-        <section class="hero pb-3 bg-cover bg-center d-flex align-items-center" style="background: url({% static 'img/schwin.png' %})">
+        <section class="hero pb-3 bg-cover bg-center d-flex align-items-center">
           <div class="container py-5">
             <div class="row px-4 px-lg-5">
               <div class="col-lg-6">
@@ -30,7 +30,7 @@
               <div class="col-md-4 mb-4 mb-md-0">
                 <a class="category-item" href="{% url 'store:category-products' category.slug %}">
                   {% if category.category_image %}
-                    <img class="img-fluid" src="{{ category.category_image.url }}" alt="{{ category.title }}">
+                      <img class="img-fluid box" src="{{ category.category_image.url }}" alt="{{ category.title }}">
                     {% else %}
                     <img class="img-fluid" src="{% static 'img/l2.jpeg' %}" alt="{{ category.title }}">
                   {% endif %}
